@@ -2,23 +2,23 @@ import * as React from "react";
 
 interface IProps {
   src: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 }
-class DeezerPlayer extends React.Component<IProps, {}> {
+class DeezerPlayerFlash extends React.Component<IProps, {}> {
   constructor(props: IProps, context: any) {
     super(props, context);
   }
 
   static defaultProps = {
-    width: 700,
-    height: 50
+    width: "100%",
+    height: 800
   };
 
   render() {
     return (
       <iframe
-        scrolling="no"
+        scrolling="yes"
         frameBorder="0"
         allowTransparency={true}
         src={this.props.src}
@@ -29,4 +29,4 @@ class DeezerPlayer extends React.Component<IProps, {}> {
   }
 }
 
-export default DeezerPlayer;
+export default DeezerPlayerFlash;
