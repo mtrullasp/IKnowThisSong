@@ -87,15 +87,13 @@ class MyPlaylists extends React.Component<IProps, {}> {
 */
     return (
       <GridList cellHeight={300} cols={4}>
-        <GridListTile key="Subheader" cols={4} style={{ height: 50}}>
-          <Subheader component="div">
-          </Subheader>
-          <Subheader component="div">
+        <GridListTile key="Subheader" cols={4} style={{ height: 40, margin: 0, padding: 0}}>
+          <Subheader component="div" style={{margin: 0, padding: 0}}>
             <TextField
               id="filtreArtists"
-              placeholder="Filter Artist"
-              className={style({width: '100%', fontSize: 50})}
-              margin="normal"
+              placeholder="Filter by Playlist Name"
+              className={style({width: '100%', fontSize: 50, margin: 0, padding: 0})}
+              margin="none"
               onChange={(e: any) => {
                 this.props.appState.filterByArtistNsme(e.target.value);
               }}

@@ -14,6 +14,7 @@ import { style } from "typestyle";
 import { EventHandler } from "react";
 import { withRouter } from "react-router";
 import TextField from "material-ui/TextField";
+import { FANCY_FONT } from "../../util/constants";
 
 const styles = theme => ({
   root: {
@@ -44,7 +45,7 @@ interface IProps {
 }
 @inject("appState")
 @observer
-class MyFavoriteComposers extends React.Component<IProps, {}> {
+class MyArtists extends React.Component<IProps, {}> {
   constructor(props: IProps, context: any) {
     super(props, context);
   }
@@ -86,13 +87,21 @@ class MyFavoriteComposers extends React.Component<IProps, {}> {
 */
     return (
       <GridList cellHeight={300} cols={4}>
-        <GridListTile key="Subheader" cols={4} style={{ height: 50 }}>
-          <Subheader component="div">
+        <GridListTile
+          key="Subheader"
+          cols={4}
+          style={{ height: 40, padding: 0, margin: 0 }}
+        >
+          <Subheader component="div" style={{ margin: 0, padding: 0 }}>
             <TextField
               id="filtreArtists"
-              placeholder="Filter Artist"
-              className={style({ width: "100%", fontSize: 50 })}
-              margin="normal"
+              placeholder={this.props.appState.filterByKindArtist}
+              className={style({
+                width: "100%",
+                fontSize: 50,
+                fontFamily: FANCY_FONT
+              })}
+              margin="none"
               onChange={(e: any) => {
                 this.props.appState.filterByArtistNsme(e.target.value);
               }}
@@ -104,9 +113,10 @@ class MyFavoriteComposers extends React.Component<IProps, {}> {
             key={artist.id}
             className={style({ cursor: "pointer" })}
             onClick={() => {
-              this.props.appState.artistIdActive = artist.id;
-              this.props.appState.goArtistTracks(artist.id);
-/*
+              //this.props.appState.artistIdActive = artist.id;
+              //this.props.appState.goArtistTracks(artist.id);
+              this.props.appState.toggleComposer(artist.id);
+              /*
               DZ.api("artist/" + artist.id + "/comments", "POST", {
                 comment: '{"composer": true}'
               });
@@ -118,9 +128,21 @@ class MyFavoriteComposers extends React.Component<IProps, {}> {
               className={classes.gridTileBar}
               title={<span style={{ fontSize: 12 }}>{artist.name}</span>}
               subtitle={
-                <span style={{ fontSize: 11 }}>
-                  {artist.nb_album} àlbumsi {artist.nb_fan} fans
-                </span>
+                <div>
+                  <span style={{ fontSize: 11 }}>
+                    {artist.nb_album} àlbumsi {artist.nb_fan} fans
+                  </span>
+                  <span
+                    style={{
+                      display: "flexbox",
+                      justifyContent: "flex-end",
+                      fontSize: 14,
+                      color: "white"
+                    }}
+                  >
+                    {artist.isComposer ? "Composer" : ""}
+                  </span>
+                </div>
               }
               /*
                   actionIcon={
@@ -138,6 +160,4 @@ class MyFavoriteComposers extends React.Component<IProps, {}> {
 }
 
 //export default App;
-export default withRouter(withStyles(styles as any)(
-  MyFavoriteComposers as any
-) as any);
+export default withRouter(withStyles(styles as any)(MyArtists as any) as any);

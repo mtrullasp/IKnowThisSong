@@ -1,10 +1,10 @@
 import * as React from "react";
 import ArtistTracks from "../ArtistTracks";
-import FavoriteComposers, {
-  default as MyFavoriteComposers
-} from "./MyFavoriteComposers";
+import Artists, {
+  default as MyArtists
+} from "./MyArtists";
 import { Route, Switch } from "react-router";
-import { ROUTE_FAVORITES, ROUTE_PLAYLISTS } from "../../util/constants";
+import { ROUTE_ARTISTS, ROUTE_PLAYLISTS } from "../../util/constants";
 import { CSSProperties } from "react";
 import Tabs, { Tab } from "material-ui/Tabs";
 import AppBar from "material-ui/AppBar";
@@ -44,7 +44,7 @@ class MyMusic extends React.Component<IProps, {}> {
       <div>
         <MyTab />
 {/*
-        <Route path={ROUTE_FAVORITES} component={MyFavoriteComposers} />
+        <Route path={ROUTE_FAVORITES} component={MyArtists} />
         <Route
           path={"/Me/Playlist/:playlistId/Tracks"}
           component={PlaylistTracks}

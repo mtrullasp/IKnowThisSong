@@ -3,7 +3,7 @@ import { match } from "react-router";
 import { AppState } from "../stores/AppStore";
 import { inject } from "mobx-react";
 import DeezerPlayerHTML5 from "./DeezerPlayerHTML5";
-import DeezerPlayerFlash from "./DeezerPlayerFlash";
+import DeezerPlayer from "./DeezerPlayerFlash";
 
 interface IProps {
   match: match<any>;
@@ -24,7 +24,7 @@ class PlaylistTracks extends React.Component<IProps, {}> {
       const src: string = host + "player?format=classic&autoplay=true&playlist=true&width=700&height=550&color=007FEB&" +
         "layout=light&size=medium&type=playlist&limit=20&id=" + playlistId + "&" + AppId + "\\";
       return (
-    	  <DeezerPlayerFlash src={src}/>
+    	  <DeezerPlayer src={src}/>
       );
     }
 }

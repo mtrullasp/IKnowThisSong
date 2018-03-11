@@ -1,8 +1,8 @@
 ///<reference path="../../node_modules/@types/react-router/index.d.ts"/>
 import * as React from "react";
-import FavoriteComposers, {
-  default as MyFavoriteComposers
-} from "./myMusic/MyFavoriteComposers";
+import Artists, {
+  default as MyArtists
+} from "./myMusic/MyArtists";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import styled from "styled-components";
 import { style } from "typestyle";
@@ -15,7 +15,7 @@ import TextField from "material-ui/TextField";
 import MyMusic from "./myMusic/MyMusic";
 import {
   FANCY_FONT,
-  ROUTE_FAVORITES,
+  ROUTE_ARTISTS,
   ROUTE_PLAYLISTS
 } from "../util/constants";
 import PlaylistTracks from "./PlaylistTracks";
@@ -49,7 +49,7 @@ class App extends React.Component<IProps, {}> {
     super(props, context);
     //const {history} = props;
     props.appState.setHistory(this.props.history);
-    props.appState.go(ROUTE_FAVORITES);
+    props.appState.go(ROUTE_ARTISTS);
   }
 
   static defaultProps = {};
@@ -106,6 +106,7 @@ class App extends React.Component<IProps, {}> {
                 </Row>
               </Col>
               <Col lg={8}>
+{/*
                 <Row className={style({ height: HEADER_HEIGHT })}>
                   <Col lg={2}>
                     <img
@@ -128,13 +129,16 @@ class App extends React.Component<IProps, {}> {
                     </label>
                   </Col>
                 </Row>
+*/}
                 <Row>
                   <Col lg={12}>
-                    <MyMusic />
+                    <div style={{marginTop: 40}}>
+                      <MyMusic />
+                    </div>
                     {/*<SwipeableViews>*/}
                       <Route
-                        path={ROUTE_FAVORITES}
-                        component={MyFavoriteComposers}
+                        path={ROUTE_ARTISTS}
+                        component={MyArtists}
                       />
                       <Route
                         path={"/Me/Playlist/:playlistId/Tracks"}
