@@ -57,7 +57,7 @@ class App extends React.Component<IProps, {}> {
   render() {
     const store = this.props.appState;
     const titleStyle: CSSProperties = {
-      fontSize: 100,
+      fontSize: 80,
       color: "#36454f",
       fontFamily: FANCY_FONT,
       fontWeight: 900,
@@ -69,7 +69,7 @@ class App extends React.Component<IProps, {}> {
         <header>
           <Grid fluid className={style({ margin: 0, padding: 0 })}>
             <Row>
-              <Col lg={4}>
+              <Col lg={3}>
                 <Row>
                   <Col lg={12} className={style({ height: HEADER_HEIGHT })}>
                     <span style={titleStyle}>I KNOW THIS SONG</span>
@@ -105,7 +105,7 @@ class App extends React.Component<IProps, {}> {
                   </Col>
                 </Row>
               </Col>
-              <Col lg={8}>
+              <Col lg={9}>
 {/*
                 <Row className={style({ height: HEADER_HEIGHT })}>
                   <Col lg={2}>
@@ -132,7 +132,7 @@ class App extends React.Component<IProps, {}> {
 */}
                 <Row>
                   <Col lg={12}>
-                    <div style={{marginTop: 40}}>
+                    <div style={{marginTop: 70}}>
                       <MyMusic />
                     </div>
                     {/*<SwipeableViews>*/}

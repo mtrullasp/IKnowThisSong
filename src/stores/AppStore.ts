@@ -6,6 +6,7 @@ import {
   ROUTE_PLAYLISTS
 } from "../util/constants";
 import composers from "../data/composers";
+import composersPhoto from "../data/composersPhoto";
 //const {getFirstImageURL} = require("../../node_modules/first-image-search-load");
 
 export declare namespace DZ {
@@ -92,6 +93,20 @@ export class AppState {
             this.userArtistsFromApi = artists.data;
             this.userArtistsFromApi.forEach(artist => {
               if (artist.picture_medium.endsWith("000000-80-0-0.jpg")) {
+                const nomsencer = artist.name.split(" ");
+                const cognom =
+                  nomsencer.length > 1
+                    ? nomsencer[nomsencer.length - 1].trim().toLowerCase()
+                    : nomsencer[0].trim().toLowerCase();
+/*
+                artist.picture_medium =
+                  "https://www.biografiasyvidas.com/biografia/" +
+                  cognom.charAt(0) +
+                  "/fotos/" +
+                  cognom +
+                  ".jpg";
+*/
+                /*
                 DZ.api(
                   "artist/" + artist.id + "/comments",
                   (comments: IResponseComment) => {
@@ -107,6 +122,7 @@ export class AppState {
                     }
                   }
                 );
+*/
               }
             });
             //dthis.getdMoreUserArtists(artists.next);
@@ -120,20 +136,33 @@ export class AppState {
           "user/me/playlists?limit=10000",
           (list: IResponseCollection<IPlaylist>) => {
             this.userPlaylistsFromApi = list.data;
-            this.tabDataSet.find(tab => tab.id === "playlists").count = list.data.length;
+            this.tabDataSet.find(tab => tab.id === "playlists").count =
+              list.data.length;
           }
         );
       }
     );
 
-    reaction(() => this.userArtistsFromApi, (artists) => {
-      this.tabDataSet.find(tab => tab.id === "composers").count = this.composersCount(artists);
-      this.tabDataSet.find(tab => tab.id === "artists").count = this.artistsCount(artists);
-    });
+    reaction(
+      () => this.userArtistsFromApi,
+      artists => {
+        this.tabDataSet.find(
+          tab => tab.id === "composers"
+        ).count = this.composersCount(artists);
+        this.tabDataSet.find(
+          tab => tab.id === "artists"
+        ).count = this.artistsCount(artists);
+      }
+    );
 
-    reaction(() => this.composers.length, () => {
-      this.tabDataSet.find(tab => tab.id === "composers").count = this.composersCount(this.userArtistsFromApi);
-    });
+    reaction(
+      () => this.composers.length,
+      () => {
+        this.tabDataSet.find(
+          tab => tab.id === "composers"
+        ).count = this.composersCount(this.userArtistsFromApi);
+      }
+    );
 
     /**
      * Events
@@ -195,9 +224,20 @@ export class AppState {
           return 1;
         }
         return 0;
-      }).map(artist => {
-        return {isComposer: this.isComposer(artist.id), ...artist} as TArtist;
+      })
+      .map(artist => {
+        return {
+          ...artist,
+          picture_medium: this.getArtistPhoto(artist.id, artist.picture_medium),
+          isComposer: this.isComposer(artist.id)
+        } as TArtist;
       });
+  }
+
+  private composersPhotos = composersPhoto;
+  private getArtistPhoto(idArtist: number, defaultPhoto: string): string {
+    debugger ;const myPhoto = this.composersPhotos.find(photo => photo.id === idArtist);
+    return !!myPhoto ? myPhoto.foto : defaultPhoto;
   }
 
   @observable userPlaylistsFromApi: Array<IPlaylist>;
@@ -234,7 +274,8 @@ export class AppState {
   }
 
   private composersCount(artists: Array<TArtist>): number {
-    debugger ;if (!artists) {
+    debugger;
+    if (!artists) {
       return null;
     }
     return artists.filter(artist => {
@@ -338,7 +379,7 @@ export class AppState {
   @observable
   tabDataSet: Array<TMyTab> = [
     {
-      id: 'composers',
+      id: "composers",
       index: 0,
       title: "My Composers",
       routePath: ROUTE_ARTISTS,
@@ -348,7 +389,7 @@ export class AppState {
       }
     },
     {
-      id: 'artists',
+      id: "artists",
       index: 1,
       title: "My Artists",
       routePath: ROUTE_ARTISTS,
@@ -358,27 +399,27 @@ export class AppState {
       }
     },
     {
-      id: 'playlists',
+      id: "playlists",
       count: null,
       index: 2,
       title: "My PlayLists",
       routePath: ROUTE_PLAYLISTS
     },
     {
-      id: 'tracks',
+      id: "tracks",
       index: 3,
       count: null,
       title: "My Tracks",
       routePath: ROUTE_PLAYLISTS
     },
     {
-      id: 'search',
+      id: "search",
       index: 4,
       title: "Search",
       routePath: ROUTE_PLAYLISTS
     },
     {
-      id: 'progress',
+      id: "progress",
       index: 5,
       title: "My Progress",
       routePath: ROUTE_PLAYLISTS
@@ -424,11 +465,23 @@ export class AppState {
     }
   }
 
-  @computed get filterByKindArtist(): string {
-    if (this.tabActiveId === 'composers') {
-      return 'Filter by Composer';
-    } else if (this.tabActiveId === 'artists') {
-      return 'Filter by Artist';
+  @computed
+  get filterByKindArtist(): string {
+    if (this.tabActiveId === "composers") {
+      return "Filter by Composer";
+    } else if (this.tabActiveId === "artists") {
+      return "Filter by Artist";
     }
+  }
+
+  @observable fotos: string;
+
+  @action
+  setFotos() {
+    this.fotos = JSON.stringify(
+      this.userArtistsFromApi.map(artist => {
+        return { id: artist.id, foto: artist.picture_medium };
+      })
+    );
   }
 }

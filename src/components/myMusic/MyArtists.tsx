@@ -86,11 +86,11 @@ class MyArtists extends React.Component<IProps, {}> {
       </div>)
 */
     return (
-      <GridList cellHeight={300} cols={4}>
+      <GridList cellHeight={300} cols={5}>
         <GridListTile
           key="Subheader"
-          cols={4}
-          style={{ height: 40, padding: 0, margin: 0 }}
+          cols={5}
+          style={{ height: 50, padding: 0, margin: 0 }}
         >
           <Subheader component="div" style={{ margin: 0, padding: 0 }}>
             <TextField
@@ -113,9 +113,15 @@ class MyArtists extends React.Component<IProps, {}> {
             key={artist.id}
             className={style({ cursor: "pointer" })}
             onClick={() => {
+              this.props.appState.userArtistsFromApi.find(
+                a => a.id === artist.id
+              ).picture_medium = prompt("Foto");
+              debugger;
+              this.props.appState.setFotos();
+
               //this.props.appState.artistIdActive = artist.id;
               //this.props.appState.goArtistTracks(artist.id);
-              this.props.appState.toggleComposer(artist.id);
+              //this.props.appState.toggleComposer(artist.id);debugger ;
               /*
               DZ.api("artist/" + artist.id + "/comments", "POST", {
                 comment: '{"composer": true}'
@@ -134,13 +140,24 @@ class MyArtists extends React.Component<IProps, {}> {
                   </span>
                   <span
                     style={{
+                      position: "relative",
+                      right: 0,
+                      color: "white",
+                      marginLeft: 10,
+                      fontSize: 16
+                    }}
+                  >
+                    {artist.id}
+                  </span>
+                  <span
+                    style={{
                       display: "flexbox",
                       justifyContent: "flex-end",
                       fontSize: 14,
                       color: "white"
                     }}
                   >
-                    {artist.isComposer ? "Composer" : ""}
+                    {artist.isComposer ? "C" : ""}
                   </span>
                 </div>
               }

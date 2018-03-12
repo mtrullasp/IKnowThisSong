@@ -20,6 +20,7 @@ class DeezerPlayerFlash extends React.Component<IProps, {}> {
       <iframe
         scrolling="yes"
         frameBorder="0"
+        style={{fontSize: 20}}
         allowTransparency={true}
         src={this.props.src}
         width={this.props.width}

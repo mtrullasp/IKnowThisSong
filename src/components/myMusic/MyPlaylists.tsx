@@ -86,8 +86,8 @@ class MyPlaylists extends React.Component<IProps, {}> {
       </div>)
 */
     return (
-      <GridList cellHeight={300} cols={4}>
-        <GridListTile key="Subheader" cols={4} style={{ height: 40, margin: 0, padding: 0}}>
+      <GridList cellHeight={300} cols={5}>
+        <GridListTile key="Subheader" cols={5} style={{ height: 40, margin: 0, padding: 0}}>
           <Subheader component="div" style={{margin: 0, padding: 0}}>
             <TextField
               id="filtreArtists"
