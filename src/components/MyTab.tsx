@@ -31,7 +31,7 @@ class MyTab extends React.Component<IProps, {}> {
             if (tab.onEnter) {
               tab.onEnter();
             }
-            debugger;
+
             this.props.appState.setTabActiveIndex(index);
           }}
         >

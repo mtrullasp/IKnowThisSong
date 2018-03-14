@@ -4,7 +4,7 @@ import Artists, {
   default as MyArtists
 } from "./MyArtists";
 import { Route, Switch } from "react-router";
-import { ROUTE_ARTISTS, ROUTE_PLAYLISTS } from "../../util/constants";
+import { ROUTE_INTERPRETERS, ROUTE_PLAYLISTS } from "../../util/constants";
 import { CSSProperties } from "react";
 import Tabs, { Tab } from "material-ui/Tabs";
 import AppBar from "material-ui/AppBar";

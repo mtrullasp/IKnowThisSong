@@ -14,7 +14,7 @@ import { style } from "typestyle";
 import { EventHandler } from "react";
 import { Route, withRouter } from "react-router";
 import TextField from "material-ui/TextField";
-import PlaylistTracks from "../PlaylistTracks";
+import PlaylistTracks from "../MyPlaylistTracks";
 
 const styles = theme => ({
   root: {
@@ -106,7 +106,7 @@ class MyPlaylists extends React.Component<IProps, {}> {
             className={style({ cursor: "pointer" })}
             onClick={() => {
               //this.props.appState.artistIdActive = artist.id;
-              debugger ;this.props.appState.goPlaylistTracks(playlist.id);
+              this.props.appState.goPlaylistTracks(playlist.id);
             }}
           >
             <img src={playlist.picture_medium} alt={playlist.title} />

@@ -2,27 +2,15 @@ import { action, observable, reaction, computed } from "mobx";
 import { History } from "history";
 import {
   MTRULLASP_USER_ID,
-  ROUTE_ARTISTS,
+  ROUTE_INTERPRETERS,
   ROUTE_PLAYLISTS
 } from "../util/constants";
 import composers from "../data/composers";
 import composersPhoto from "../data/composersPhoto";
-//const {getFirstImageURL} = require("../../node_modules/first-image-search-load");
 
-export declare namespace DZ {
-  function login(callback: Function, perms: any): void;
-  function logout(): void;
-  function getLoginStatus(callback: Function): void;
-  function api(user: string, callback: Function): void;
-  function api(
-    user: string,
-    method: string,
-    params: Object,
-    callback?: Function
-  ): void;
-  let Event: any;
-  let numberOfGreetings: number;
-}
+declare let window: any;
+
+//const {getFirstImageURL} = require("../../node_modules/first-image-search-load");
 
 export interface IResponseComment {
   data: Array<IComment>;
@@ -81,6 +69,7 @@ export class TMyTab {
 export class AppState {
   constructor() {
     this.userArtistsFromApi = [];
+    const DZ = window.DZ;
     reaction(
       () => this.userId,
       user => {
@@ -91,22 +80,22 @@ export class AppState {
           "user/me/artists?limit=1000",
           (artists: IResponseCollection<TArtist>) => {
             this.userArtistsFromApi = artists.data;
-            this.userArtistsFromApi.forEach(artist => {
+            /*this.userArtistsFromApi.forEach(artist => {
               if (artist.picture_medium.endsWith("000000-80-0-0.jpg")) {
                 const nomsencer = artist.name.split(" ");
                 const cognom =
                   nomsencer.length > 1
                     ? nomsencer[nomsencer.length - 1].trim().toLowerCase()
                     : nomsencer[0].trim().toLowerCase();
-/*
+                /!*
                 artist.picture_medium =
                   "https://www.biografiasyvidas.com/biografia/" +
                   cognom.charAt(0) +
                   "/fotos/" +
                   cognom +
                   ".jpg";
-*/
-                /*
+*!/
+                /!*
                 DZ.api(
                   "artist/" + artist.id + "/comments",
                   (comments: IResponseComment) => {
@@ -122,9 +111,9 @@ export class AppState {
                     }
                   }
                 );
-*/
+*!/
               }
-            });
+            });*/
             //dthis.getdMoreUserArtists(artists.next);
           }
         );
@@ -150,8 +139,8 @@ export class AppState {
           tab => tab.id === "composers"
         ).count = this.composersCount(artists);
         this.tabDataSet.find(
-          tab => tab.id === "artists"
-        ).count = this.artistsCount(artists);
+          tab => tab.id === "interpreters"
+        ).count = this.interpretersCount(artists);
       }
     );
 
@@ -167,11 +156,13 @@ export class AppState {
     /**
      * Events
      */
+/*
     DZ.Event.subscribe("player_play", function(evt_name) {
       alert("playing");
-      debugger;
+
       console.log("Player is playing");
     });
+*/
   }
 
   /*
@@ -199,16 +190,29 @@ export class AppState {
   };
 
   @observable userArtistsFromApi: Array<TArtist>;
+  @computed get userArtistsFromApiResolt(): Array<TArtist> {
+    return this.userArtistsFromApi.map(artist => {
+      return {...artist, isComposer: this.isComposer(artist.id)}
+    })
+  }
+
   @computed
   get userArtists(): Array<TArtist> {
-    if (!this.userArtistsFromApi) {
+    if (!this.userArtistsFromApiResolt) {
       return [];
     }
-    return this.userArtistsFromApi
+    return this.userArtistsFromApiResolt
       .filter((artist: TArtist) => {
-        if (this.showOnlyComposers && !this.isComposer(artist.id)) {
+        if (this.showOnlyComposers) {
+          if (!this.isComposer(artist.id)) {
+            return false;
+          }
+        } else if (this.isComposer(artist.id)) {
           return false;
         }
+        return artist;
+      })
+      .filter((artist: TArtist) => {
         if (!this.artistNameFilter) {
           return true;
         }
@@ -228,15 +232,18 @@ export class AppState {
       .map(artist => {
         return {
           ...artist,
-          picture_medium: this.getArtistPhoto(artist.id, artist.picture_medium),
-          isComposer: this.isComposer(artist.id)
+          picture_medium: this.getArtistPhoto(artist, artist.picture_medium)
         } as TArtist;
       });
   }
 
   private composersPhotos = composersPhoto;
-  private getArtistPhoto(idArtist: number, defaultPhoto: string): string {
-    debugger ;const myPhoto = this.composersPhotos.find(photo => photo.id === idArtist);
+  private getArtistPhoto(artist: TArtist, defaultPhoto: string): string {
+
+    const myPhoto = this.composersPhotos.find(photo => photo.id === artist.id);
+    if (!artist.isComposer) {
+      return defaultPhoto;
+    }
     return !!myPhoto ? myPhoto.foto : defaultPhoto;
   }
 
@@ -266,15 +273,17 @@ export class AppState {
       });
   }
 
-  private artistsCount(artists: Array<TArtist>): number {
+  private interpretersCount(artists: Array<TArtist>): number {
     if (!artists) {
       return null;
     }
-    return artists.length;
+    return artists.filter(artist => {
+      return !this.composers.includes(artist.id);
+    }).length;
   }
 
   private composersCount(artists: Array<TArtist>): number {
-    debugger;
+
     if (!artists) {
       return null;
     }
@@ -301,6 +310,7 @@ export class AppState {
 
   @action
   login() {
+    const DZ = window.DZ;
     DZ.login(
       response => {
         if (response.authResponse) {
@@ -340,10 +350,10 @@ export class AppState {
   }
   private history: History;
 
-  @action debugger;
+  @action
   goPlaylistTracks(playlistId: number) {
     //this.history.push("http://127.0.0.1:3000/Me/Playlist/1600104235/Tracks")
-    debugger;
+
     if (!playlistId) {
       return;
     }
@@ -361,7 +371,7 @@ export class AppState {
       }
   */
 
-  private tabMyMusica = [ROUTE_ARTISTS, ROUTE_PLAYLISTS];
+  private tabMyMusica = [ROUTE_INTERPRETERS, ROUTE_PLAYLISTS];
 
   @observable myMusicActiveIndex: number;
   @action
@@ -382,17 +392,17 @@ export class AppState {
       id: "composers",
       index: 0,
       title: "My Composers",
-      routePath: ROUTE_ARTISTS,
+      routePath: ROUTE_INTERPRETERS,
       count: null,
       onEnter: () => {
         this.showOnlyComposers = true;
       }
     },
     {
-      id: "artists",
+      id: "interpreters",
       index: 1,
-      title: "My Artists",
-      routePath: ROUTE_ARTISTS,
+      title: "My Interpreters",
+      routePath: ROUTE_INTERPRETERS,
       count: null,
       onEnter: () => {
         this.showOnlyComposers = false;
@@ -448,7 +458,7 @@ export class AppState {
       return;
     }
     this.tabActiveIndex = index;
-    debugger;
+
     this.history.push(this.tabActiveRoutePath);
   }
 
@@ -461,7 +471,7 @@ export class AppState {
       this.composers.splice(this.composers.indexOf(artistId), 1);
     } else {
       this.composers.push(artistId);
-      debugger;
+
     }
   }
 

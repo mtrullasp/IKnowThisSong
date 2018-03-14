@@ -1,8 +1,6 @@
 ///<reference path="../../node_modules/@types/react-router/index.d.ts"/>
 import * as React from "react";
-import Artists, {
-  default as MyArtists
-} from "./myMusic/MyArtists";
+import Artists, { default as MyArtists } from "./myMusic/MyArtists";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import styled from "styled-components";
 import { style } from "typestyle";
@@ -15,12 +13,13 @@ import TextField from "material-ui/TextField";
 import MyMusic from "./myMusic/MyMusic";
 import {
   FANCY_FONT,
-  ROUTE_ARTISTS,
+  ROUTE_INTERPRETERS,
   ROUTE_PLAYLISTS
 } from "../util/constants";
 import PlaylistTracks from "./PlaylistTracks";
 import MyPlaylists from "./myMusic/MyPlaylists";
 import SwipeableViews from "react-swipeable-views";
+import MyPlaylistTracks from "./MyPlaylistTracks";
 
 const styles = {
   container: {
@@ -37,7 +36,7 @@ const styles = {
   }
 };
 
-const HEADER_HEIGHT = 150;
+//const HEADER_HEIGHT = 150;
 interface IProps {
   appState?: AppState;
   history?: any;
@@ -49,7 +48,7 @@ class App extends React.Component<IProps, {}> {
     super(props, context);
     //const {history} = props;
     props.appState.setHistory(this.props.history);
-    props.appState.go(ROUTE_ARTISTS);
+    props.appState.go(ROUTE_INTERPRETERS);
   }
 
   static defaultProps = {};
@@ -71,12 +70,12 @@ class App extends React.Component<IProps, {}> {
             <Row>
               <Col lg={3}>
                 <Row>
-                  <Col lg={12} className={style({ height: HEADER_HEIGHT })}>
+                  <Col lg={12}>
                     <span style={titleStyle}>I KNOW THIS SONG</span>
                     <span
                       style={{
                         fontFamily: "verdana",
-                        fontSize: 12                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ,
+                        fontSize: 12,
                         display: "block",
                         position: "relative",
                         left: 10,
@@ -87,6 +86,16 @@ class App extends React.Component<IProps, {}> {
                         by Moisès Trullàs
                       </a>
                     </span>
+                  </Col>
+                  <Col lg={12}>
+                    <div style={{ marginBottom: 10 }}>
+                      <div style={{ position: "relative", left: 10, top: 0 }}>
+                        <span>Streaming partner </span>
+                        <a href="http://www.deezer.com" target="_blank">
+                          <img src="../../img/deezer.png" />
+                        </a>
+                      </div>
+                    </div>
                   </Col>
                   <Col
                     className={style({
@@ -106,7 +115,7 @@ class App extends React.Component<IProps, {}> {
                 </Row>
               </Col>
               <Col lg={9}>
-{/*
+                {/*
                 <Row className={style({ height: HEADER_HEIGHT })}>
                   <Col lg={2}>
                     <img
@@ -132,24 +141,21 @@ class App extends React.Component<IProps, {}> {
 */}
                 <Row>
                   <Col lg={12}>
-                    <div style={{marginTop: 70}}>
+                    <div style={{ marginTop: 30 }}>
                       <MyMusic />
                     </div>
                     {/*<SwipeableViews>*/}
-                      <Route
-                        path={ROUTE_ARTISTS}
-                        component={MyArtists}
-                      />
-                      <Route
-                        path={"/Me/Playlist/:playlistId/Tracks"}
-                        component={PlaylistTracks}
-                        exact
-                      />
-                      <Route
-                        path={ROUTE_PLAYLISTS}
-                        component={MyPlaylists}
-                        exact
-                      />
+                    <Route path={ROUTE_INTERPRETERS} component={MyArtists} />
+                    <Route
+                      path={"/Me/Playlist/:playlistId/Tracks"}
+                      component={MyPlaylistTracks}
+                      exact
+                    />
+                    <Route
+                      path={ROUTE_PLAYLISTS}
+                      component={MyPlaylists}
+                      exact
+                    />
                     {/*</SwipeableViews>*/}
                   </Col>
                 </Row>
@@ -157,14 +163,6 @@ class App extends React.Component<IProps, {}> {
             </Row>
           </Grid>
         </header>
-        <div style={{ marginBottom: 10 }}>
-          <div style={{ position: "absolute", right: 10, top: 10 }}>
-            <span>Streaming partner </span>
-            <a href="http://www.deezer.com" target="_blank">
-              <img src="../../img/deezer.png" />
-            </a>
-          </div>
-        </div>
       </div>
     );
   }

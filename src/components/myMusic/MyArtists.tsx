@@ -1,6 +1,6 @@
 import * as React from "react";
 import { inject, observer } from "mobx-react";
-import { AppState, DZ } from "../../stores/AppStore";
+import { AppState } from "../../stores/AppStore";
 //import GridList, { GridListTile,  GridListTileBar } from 'material-ui/GridList';
 import Subheader from "material-ui/List/ListSubheader";
 import IconButton from "material-ui/IconButton";
@@ -113,15 +113,17 @@ class MyArtists extends React.Component<IProps, {}> {
             key={artist.id}
             className={style({ cursor: "pointer" })}
             onClick={() => {
-              this.props.appState.userArtistsFromApi.find(
-                a => a.id === artist.id
-              ).picture_medium = prompt("Foto");
-              debugger;
-              this.props.appState.setFotos();
+              if (artist.isComposer) {
+                this.props.appState.userArtistsFromApi.find(
+                  a => a.id === artist.id
+                ).picture_medium = prompt("Foto");
 
+                this.props.appState.setFotos();
+              } else {
+                this.props.appState.toggleComposer(artist.id);
+              }
               //this.props.appState.artistIdActive = artist.id;
               //this.props.appState.goArtistTracks(artist.id);
-              //this.props.appState.toggleComposer(artist.id);debugger ;
               /*
               DZ.api("artist/" + artist.id + "/comments", "POST", {
                 comment: '{"composer": true}'
