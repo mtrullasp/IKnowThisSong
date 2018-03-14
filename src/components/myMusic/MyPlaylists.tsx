@@ -87,12 +87,21 @@ class MyPlaylists extends React.Component<IProps, {}> {
 */
     return (
       <GridList cellHeight={300} cols={5}>
-        <GridListTile key="Subheader" cols={5} style={{ height: 40, margin: 0, padding: 0}}>
-          <Subheader component="div" style={{margin: 0, padding: 0}}>
+        <GridListTile
+          key="Subheader"
+          cols={5}
+          style={{ height: 40, margin: 0, padding: 0 }}
+        >
+          <Subheader component="div" style={{ margin: 0, padding: 0 }}>
             <TextField
               id="filtreArtists"
               placeholder="Filter by Playlist Name"
-              className={style({width: '100%', fontSize: 50, margin: 0, padding: 0})}
+              className={style({
+                width: "100%",
+                fontSize: 50,
+                margin: 0,
+                padding: 0
+              })}
               margin="none"
               onChange={(e: any) => {
                 this.props.appState.filterByArtistNsme(e.target.value);
@@ -114,17 +123,13 @@ class MyPlaylists extends React.Component<IProps, {}> {
               className={classes.gridTileBar}
               title={<span style={{ fontSize: 12 }}>{playlist.title}</span>}
               subtitle={
-                <span style={{ fontSize: 11 }}>
-                  {playlist.nb_tracks} traks and {playlist.fans} fans
-                </span>
+                <div>
+                  <span style={{ fontSize: 11 }}>
+                    {playlist.nb_tracks} traks and {playlist.fans} fans
+                  </span>
+                  <input type={'text'} value={playlist.id} />
+                </div>
               }
-              /*
-                  actionIcon={
-                    <IconButton className={classes.icon}>
-                      <a href={artist.link}><InfoIcon /></a>
-                    </IconButton>
-                  }
-*/
             />
           </GridListTile>
         ))}
@@ -134,6 +139,4 @@ class MyPlaylists extends React.Component<IProps, {}> {
 }
 
 //export default App;
-export default withRouter(withStyles(styles as any)(
-  MyPlaylists as any
-) as any);
+export default withRouter(withStyles(styles as any)(MyPlaylists as any) as any);

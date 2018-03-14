@@ -15,7 +15,5 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById("dz-root")
+  document.getElementById("root")
 );
-document.getElementById("dz-root").style.width = "auto";
-document.getElementById("dz-root").style.height = "auto";

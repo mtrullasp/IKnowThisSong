@@ -1,3 +1,45 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000a11">
+  <meta name="description" content="NavyPlayer is a music app powered by deezer, a digital service that gives you access to millions of songs.">
+
+  <title>NavyPlayer</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <link rel='stylesheet' href='css/style.css'>
+
+  <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans|Playfair+Display|Reem+Kufi|Roboto+Slab:700" rel="stylesheet">
+  <link rel="shortcut icon" href="./images/f.ico" type="image/x-icon">
+  <link rel="icon" href="./images/f.ico" type="image/x-icon">
+  <script src="js/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="dz-root" style='display:none'></div>
+<div id="app"></div>
+<script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>
+<script>
+  setTimeout(() => {
+  DZ.init({
+    appId: '272642',
+    channelUrl: 'http://127.0.0.1:3000/channel.html',
+    player: {
+      onload: function () {
+        alert('load');
+      }
+    }
+  })}, 0);
+</script>
+<script src="/static/bundle.js"></script>
+&lt;!&ndash;<script src="js/out.js"></script>&ndash;&gt;
+<noscript>To run the site you have to enable Javascript</noscript>
+</body>
+</html>
+-->
+
+
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -12,22 +54,21 @@
             crossorigin="anonymous"></script>
   </head>
   <body style="background: beige">
-  <div id="app"></div>
-  <div id="dz-root"></div>
+  <div id="root"></div>
+  <div id="dz-root" style='display:none'></div>
   <script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>
   <script>
+    setTimeout(() => {
     DZ.init({
       appId  : '272642',
-      channelUrl : 'http://127.0.0.1:3000/channel.html'
-    });
-    DZ.init({
+      channelUrl : 'http://127.0.0.1:3000/channel.html',
       player: {
-      onload: function() {
-        alert("loaded");
-        DZ.player.playAlbum(2962681, true);
+        onload: function() {
+          alert("loaded ikts");
+          //DZ.player.playAlbum(2962681, true);
+        }
       }
-    }
-    });
+    })}, 0);
   </script>
   <script src="/static/bundle.js"></script>
   <noscript>To run the site you have to enable Javascript</noscript>

@@ -353,11 +353,12 @@ export class AppState {
   @action
   goPlaylistTracks(playlistId: number) {
     //this.history.push("http://127.0.0.1:3000/Me/Playlist/1600104235/Tracks")
-
+    const DZ = window.DZ;
     if (!playlistId) {
       return;
     }
-    this.history.push("/Me/Playlist/" + playlistId.toString() + "/Tracks");
+    DZ.player.playPlaylist(playlistId, true);
+    //this.history.push("/Me/Playlist/" + playlistId.toString() + "/Tracks");
   }
 
   @action
