@@ -41,6 +41,7 @@
     "css-loader": "^0.28.10",
     "first-image-search-load": "^0.4.0",
     "google-images": "^2.1.0",
+    "history": "^4.7.2",
     "material-ui": "^1.0.0-beta.36",
     "material-ui-icons": "^1.0.0-beta.36",
     "mobx": "^3.6.1",

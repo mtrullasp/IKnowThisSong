@@ -12,6 +12,42 @@ declare let window: any;
 
 //const {getFirstImageURL} = require("../../node_modules/first-image-search-load");
 
+export interface IAlbum {
+  id: number;
+  title: string;
+}
+
+export interface IArtist {
+  id: number;
+  name: string;
+}
+
+export interface ITrack {
+  id: number; //The track's Deezer id
+  readable: boolean; //true if the track is readable in the player for the current user	boolean
+  title: string; //The track's fulltitle	string
+  title_short: string; //The track's short title	string
+  title_version: string; //The track version	string
+  unseen: boolean; //The track unseen status	boolean
+  isrc: string; //The track isrc	string
+  link: string; //The url of the track on Deezer	url
+  share: string; //The share link of the track on Deezer	url
+  duration: number; //The track's duration in seconds	int
+  track_position: number; //The position of the track in its album	int
+  disk_number: number; //The track's album's disk number	int
+  rank: number; //The track's Deezer rank	int
+  release_date: Date; //The track's release date	date
+  explicit_lyrics: boolean; //Whether the track contains explicit lyrics	boolean
+  preview: string; //The url of track's preview file. This file contains the first 30 seconds of the track	url
+  bpm: number; //beats per minute	float
+  gain: number; //Signal strength	float
+  available_countries: Array<string>; //List of countries where the track is available	list
+  alternative: string; //Return an alernative readable track if the current track is not readable	track
+  contributors: Array<Object>; //Return a list of contributors on the track	list
+  artist: IArtist; //	artist object containing : id, name, link, share, picture, picture_small, picture_medium, picture_big, picture_xl, nb_album, nb_fan, radio, tracklist, role	object
+  album: IAlbum; //	album object containing : id, title, link, cover, cover_small, cover_medium, cover_big, cover_xl, release_date	object
+}
+
 export interface IResponseComment {
   data: Array<IComment>;
   total: number;
@@ -156,7 +192,7 @@ export class AppState {
     /**
      * Events
      */
-/*
+    /*
     DZ.Event.subscribe("player_play", function(evt_name) {
       alert("playing");
 
@@ -190,10 +226,11 @@ export class AppState {
   };
 
   @observable userArtistsFromApi: Array<TArtist>;
-  @computed get userArtistsFromApiResolt(): Array<TArtist> {
+  @computed
+  get userArtistsFromApiResolt(): Array<TArtist> {
     return this.userArtistsFromApi.map(artist => {
-      return {...artist, isComposer: this.isComposer(artist.id)}
-    })
+      return { ...artist, isComposer: this.isComposer(artist.id) };
+    });
   }
 
   @computed
@@ -239,7 +276,6 @@ export class AppState {
 
   private composersPhotos = composersPhoto;
   private getArtistPhoto(artist: TArtist, defaultPhoto: string): string {
-
     const myPhoto = this.composersPhotos.find(photo => photo.id === artist.id);
     if (!artist.isComposer) {
       return defaultPhoto;
@@ -283,7 +319,6 @@ export class AppState {
   }
 
   private composersCount(artists: Array<TArtist>): number {
-
     if (!artists) {
       return null;
     }
@@ -472,7 +507,6 @@ export class AppState {
       this.composers.splice(this.composers.indexOf(artistId), 1);
     } else {
       this.composers.push(artistId);
-
     }
   }
 
@@ -495,4 +529,12 @@ export class AppState {
       })
     );
   }
+
+  /**
+   * Tracks
+   */
+  @observable activePlayListId: number;
+  @observable activeTracksList: Array<ITrack> = [];
+  @observable activeTrackIndex: number;
+  @observable isPlaying: boolean = false;
 }

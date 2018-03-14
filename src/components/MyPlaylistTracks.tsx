@@ -1,7 +1,7 @@
 import * as React from "react";
 import { match } from "react-router";
-import { AppState } from "../stores/AppStore";
-import { inject } from "mobx-react";
+import { AppState, IResponseCollection, ITrack } from "../stores/AppStore";
+import { inject, observer } from "mobx-react";
 import DeezerPlayerHTML5 from "./DeezerPlayerHTML5";
 import DeezerPlayer from "./DeezerPlayerFlash";
 import MyPlayer from "./myPlayer/MyPlayer";
@@ -13,28 +13,45 @@ interface IProps {
   appState?: AppState;
 }
 @inject("appState")
+@observer
 class MyPlaylistTracks extends React.Component<IProps, {}> {
-    constructor(props: IProps, context: any) {
-      super(props, context);
-    }
-
-    static defaultProps = {};
-
-    render() {
-      const AppId = this.props.appState.APP_ID;
-      const host = "https://www.deezer.com/plugins/";
-      const playlistId: string = this.props.match.params['playlistId'];
+  constructor(props: IProps, context: any) {
+    super(props, context);
+    debugger;
+    props.appState.activeTracksList = [];
+    const AppId = this.props.appState.APP_ID;
+    const host = "https://www.deezer.com/plugins/";
+    const playlistId: number = parseFloat(
+      this.props.match.params["playlistId"]
+    );
+    props.appState.activePlayListId = playlistId;
+    const DZ = window.DZ;
+    /*
+            const src: string = host + "player?format=classic&autoplay=true&playlist=true&width=700&height=550&color=007FEB&" +
+              "layout=light&size=medium&type=playlist&limit=20&id=" + playlistId + "&" + AppId + "\\";
+      */
 /*
-      const src: string = host + "player?format=classic&autoplay=true&playlist=true&width=700&height=550&color=007FEB&" +
-        "layout=light&size=medium&type=playlist&limit=20&id=" + playlistId + "&" + AppId + "\\";
+    DZ.player.playPlaylist(playlistId, false, 0, 0, resp => {
+      this.props.appState.activeTracksList = resp.tracks;
+    });
 */
-      const DZ = window.DZ;
-      DZ.player.playPlaylist(playlistId);
+    DZ.api("/playlist/" + playlistId + "/tracks", (tracks: IResponseCollection<ITrack>) => {
+      debugger ;this.props.appState.activeTracksList = tracks.data;
+/*
+      tracks.data.forEach(track => {
+        DZ.api("/track/" + track.id, trackAmpliat => {
+          debugger ;track = trackAmpliat;
+        })
+      })
+*/
+    });
+  }
 
-      return (
-    	  <MyPlayer isPlaying={false}/>
-      );
-    }
+  static defaultProps = {};
+
+  render() {
+    return <MyPlayer />;
+  }
 }
 
 export default MyPlaylistTracks;

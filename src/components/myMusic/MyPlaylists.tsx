@@ -15,6 +15,8 @@ import { EventHandler } from "react";
 import { Route, withRouter } from "react-router";
 import TextField from "material-ui/TextField";
 import PlaylistTracks from "../MyPlaylistTracks";
+import { Link } from "react-router-dom";
+import { ROUTE_PLAYLIST, ROUTE_PLAYLISTS } from "../../util/constants";
 
 const styles = theme => ({
   root: {
@@ -110,13 +112,15 @@ class MyPlaylists extends React.Component<IProps, {}> {
           </Subheader>
         </GridListTile>
         {this.props.appState.userPlaylists.map((playlist, index) => (
+          <Link
+            to={ROUTE_PLAYLIST.replace(
+              ":playlistId",
+              playlist.id.toString()
+            )}
+          >
           <GridListTile
             key={playlist.id}
             className={style({ cursor: "pointer" })}
-            onClick={() => {
-              //this.props.appState.artistIdActive = artist.id;
-              this.props.appState.goPlaylistTracks(playlist.id);
-            }}
           >
             <img src={playlist.picture_medium} alt={playlist.title} />
             <GridListTileBar
@@ -127,11 +131,12 @@ class MyPlaylists extends React.Component<IProps, {}> {
                   <span style={{ fontSize: 11 }}>
                     {playlist.nb_tracks} traks and {playlist.fans} fans
                   </span>
-                  <input type={'text'} value={playlist.id} />
+                  <input type={"text"} value={playlist.id} />
                 </div>
               }
             />
           </GridListTile>
+          </Link>
         ))}
       </GridList>
     );

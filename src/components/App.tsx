@@ -13,7 +13,7 @@ import TextField from "material-ui/TextField";
 import MyMusic from "./myMusic/MyMusic";
 import {
   FANCY_FONT,
-  ROUTE_INTERPRETERS,
+  ROUTE_INTERPRETERS, ROUTE_PLAYLIST,
   ROUTE_PLAYLISTS
 } from "../util/constants";
 import PlaylistTracks from "./PlaylistTracks";
@@ -154,6 +154,11 @@ class App extends React.Component<IProps, {}> {
                     <Route
                       path={ROUTE_PLAYLISTS}
                       component={MyPlaylists}
+                      exact
+                    />
+                    <Route
+                      path={ROUTE_PLAYLIST}
+                      component={MyPlaylistTracks}
                       exact
                     />
                     {/*</SwipeableViews>*/}
