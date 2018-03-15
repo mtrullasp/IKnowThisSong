@@ -63,6 +63,11 @@ class App extends React.Component<IProps, {}> {
       bold: "900",
       alignSelf: "flex-end"
     };
+    const overlayImageStyle: CSSProperties = {
+      position: "relative",
+      top: 0,
+      left: 0
+    };
     return (
       <div>
         <header>
@@ -104,13 +109,21 @@ class App extends React.Component<IProps, {}> {
                       margin: 10
                     })}
                   >
-                    <img
-                      src={'../../img/' + this.props.appState.imageSide}
-                      style={{ width: "100%", cursor: "pointer" }}
-                      onClick={() => {
-                        this.props.appState.goBack();
-                      }}
-                    />
+                    <div id="overlayCcontainer">
+                      <img
+                        src={'../../img/' + this.props.appState.imageSide}
+                        style={{ width: "100%", cursor: "pointer", ...overlayImageStyle }}
+                      />
+{/*
+                      <img
+                        src={'../../img/' + this.props.appState.imageSizeOverlay}
+                        style={{ width: "100%", cursor: "pointer", opacity: 1, zIndex: 100, ...overlayImageStyle }}
+                        onClick={() => {
+                          this.props.appState.playerTogglePlay();
+                        }}
+                      />
+*/}
+                    </div>
                   </Col>
                 </Row>
               </Col>

@@ -10,7 +10,22 @@ import { getComposers, insertConposers } from "../data/dbComposers";
 import composersPhoto from "../data/composersPhoto";
 import composers from "../data/composers";
 
+export interface IDZ {
+  Event: {
+    subscribe: (key: string, callback: Function ) => void;
+  };
+  api: any;
+  login: (callback: (response: any) => any, perms: any) => void;
+  player: {
+    playPlaylist(playlistId: number, autoPlay: boolean, index: number),
+    isPlaying: boolean,
+    play: () => void,
+    pause: ()=> void
+  }
+}
+
 declare let window: any;
+const DZ: IDZ = window.DZ;
 
 //const {getFirstImageURL} = require("../../node_modules/first-image-search-load");
 
@@ -104,14 +119,6 @@ export class TMyTab {
   onEnter?: () => void;
 }
 
-export interface IDZ {
-  Event: {
-    subscribe: (key: string, callback: Function ) => void;
-  }
-
-  api: any;
-}
-
 export class AppState {
   constructor() {
 /*
@@ -120,13 +127,12 @@ export class AppState {
     });
 */
     this.userArtistsFromApi = [];
-    const DZ: IDZ = window.DZ;
 
     DZ.Event.subscribe('player_play', () => {
       this.imageSide = 'hifiAntic.gif';
     });
 
-    DZ.Event.subscribe('player_pause', () => {
+    DZ.Event.subscribe('player_paused', () => {
       this.imageSide = 'hifiAnticFix.gif';
     });
 
@@ -218,15 +224,7 @@ export class AppState {
     /**
      * Events
      */
-    /*
-    DZ.Event.subscribe("player_play", function(evt_name) {
-      alert("playing");
-
-      console.log("Player is playing");
-    });
-*/
   }
-
   /*
   getdMoreUserArtists = (urlParam: string) => {
     if (!urlParam) {
@@ -246,6 +244,14 @@ export class AppState {
 */
 
   @observable user: IUser;
+
+  /*
+  DZ.Event.subscribe("player_play", function(evt_name) {
+    alert("playing");
+
+    console.log("Player is playing");
+  });
+*/
 
   private isComposer = (artistId: number): boolean => {
     return this.composers.includes(artistId);
@@ -373,7 +379,6 @@ export class AppState {
 
   @action
   login() {
-    const DZ = window.DZ;
     DZ.login(
       response => {
         if (response.authResponse) {
@@ -416,11 +421,10 @@ export class AppState {
   @action
   goPlaylistTracks(playlistId: number) {
     //this.history.push("http://127.0.0.1:3000/Me/Playlist/1600104235/Tracks")
-    const DZ = window.DZ;
     if (!playlistId) {
       return;
     }
-    DZ.player.playPlaylist(playlistId, true);
+    DZ.player.playPlaylist(playlistId, true, 0);
     //this.history.push("/Me/Playlist/" + playlistId.toString() + "/Tracks");
   }
 
@@ -572,8 +576,47 @@ export class AppState {
   @observable activePlayListId: number;
   @observable activeTracksList: Array<ITrack> = [];
   @observable activeTrackIndex: number;
-  @observable isPlaying: boolean = false;
+
+/*
+  @computed get imageSide(): string {
+    if (this.playerIsPlaying) {
+      return "hifiAntic.gif";
+    } else {
+      return 'hifiAnticFix.gif';
+    }
+  }
+*/
 
   @observable imageSide: string = 'hifiAnticFix.gif';
+  @computed get imageSizeOverlay(): string {
+    if (this.playerIsPlaying) {
+      return 'pause.png';
+    } else {
+      return 'transparentPlay.jpg';
+    }
+  }
 
+  @computed get playerIsPlaying(): boolean {
+    return DZ.player.isPlaying;
+  }
+
+  @action playerPlay() {
+    DZ.player.play();
+  }
+
+  @action playerTogglePlay() {
+    if (this.playerIsPlaying) {
+      this.playerPause();
+    } else {
+      this.playerPlay();
+    }
+  }
+
+  @action playerPause() {
+    DZ.player.pause();
+  }
+
+  @action playerPlayPlaylist(playlistId: number, autoPlay: boolean, index: number) {
+    DZ.player.playPlaylist(playlistId, autoPlay, index);
+  }
 }

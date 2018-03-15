@@ -21,7 +21,8 @@ class MyPlayer extends React.Component<IProps, {}> {
   static defaultProps = {};
 
   render() {
-    const DZ = window.DZ;
+    //const DZ = window.DZ;
+    const state = this.props.appState;
     const items = this.props.appState.activeTracksList.map((track, index) => {
       return (
         <ListItem
@@ -35,16 +36,16 @@ class MyPlayer extends React.Component<IProps, {}> {
           component="a"
           href="#simple-list"
           onClick={() => {
-            if (
-              DZ.player.isPlaying() &&
+            debugger ;if (
+              state.playerIsPlaying &&
               this.props.appState.activeTrackIndex === index
             ) {
               this.props.appState.activeTrackIndex = -1;
-              DZ.player.pause();
+              state.playerPause();
             } else {
               this.props.appState.activeTrackIndex = index;
               debugger;
-              DZ.player.playPlaylist(
+              state.playerPlayPlaylist(
                 this.props.appState.activePlayListId,
                 true,
                 index

@@ -165,9 +165,13 @@ class MyArtists extends React.Component<IProps, {}> {
               }
               actionIcon={
                 <IconButton className={classes.icon}>
-                  <a href={artist.link}>
+                  <a
+                    href={artist.link}
+                    onClick={(e: any) => {
+                      e.preventPrpagation();
+                    }}
+                  >
                     <InfoIcon />
-                    onClick={(e: any) => {e.preventPrpagation()}}
                   </a>
                 </IconButton>
               }

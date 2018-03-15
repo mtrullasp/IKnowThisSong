@@ -3,6 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="cfeda28d-e5d9-4b76-98fa-ac86aa04d926" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/pause.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/transparentPlay.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/transparentPlay.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/myMusic/MyArtists.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/myMusic/MyArtists.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/myPlayer/MyPlayer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/myPlayer/MyPlayer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/AppStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/AppStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -17,11 +25,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MyPlayer.tsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MyPlayer.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/myPlayer/MyPlayer.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="411">
+              <caret line="63" column="12" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -29,8 +40,8 @@
       <file leaf-file-name="MyPlaylists.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/myMusic/MyPlaylists.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="113" column="36" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
+            <state relative-caret-position="462">
+              <caret line="143" selection-start-line="143" selection-end-line="143" />
               <folding>
                 <element signature="e#212#267#0" expanded="true" />
                 <element signature="e#563#642#0" expanded="true" />
@@ -39,44 +50,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.tsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/index.tsx">
+      <file leaf-file-name="AppStore.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/stores/AppStore.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="187">
+              <caret line="334" column="33" lean-forward="true" selection-start-line="334" selection-start-column="33" selection-end-line="334" selection-end-column="33" />
               <folding>
-                <element signature="e#0#31#0" expanded="true" />
+                <element signature="e#0#68#0" expanded="true" />
+                <element signature="e#265#333#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pause.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/img/pause.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file leaf-file-name="MyArtists.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/myMusic/MyArtists.tsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="208">
-              <caret line="146" column="33" selection-start-line="146" selection-start-column="33" selection-end-line="146" selection-end-column="33" />
+              <caret line="68" column="72" selection-start-line="68" selection-start-column="72" selection-end-line="68" selection-end-column="72" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dbComposers.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/dbComposers.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="composers.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data/composers.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="164" column="1" selection-start-line="164" selection-start-column="1" selection-end-line="164" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -93,16 +92,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.tsx" pinned="false" current-in-tab="false">
+      <file leaf-file-name="App.tsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/App.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="107" column="33" selection-start-line="107" selection-start-column="33" selection-end-line="107" selection-end-column="33" />
+            <state relative-caret-position="530">
+              <caret line="124" selection-start-line="116" selection-end-line="125" />
               <folding>
                 <element signature="e#73#104#0" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="play.jpg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/img/play.jpg">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file leaf-file-name="transparentPlay.jpg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/img/transparentPlay.jpg">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file leaf-file-name="transparentPlay.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/img/transparentPlay.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
     </leaf>
@@ -117,19 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>409729</find>
-      <find>goreck</find>
-      <find>bruch</find>
-      <find>wi</find>
-      <find>berg</find>
-      <find>gouno</find>
-      <find>bach</find>
-      <find>ispl</find>
-      <find>DZ.api</find>
-      <find>see</find>
-      <find>ths</find>
-      <find>BACK</find>
-      <find>BAC</find>
       <find>addC</find>
       <find>INPUT</find>
       <find>COLS</find>
@@ -143,10 +144,23 @@
       <find>onClick=</find>
       <find>hifiant</find>
       <find>DZ</find>
-      <find>dz</find>
       <find>tojs</find>
       <find>hifi</find>
       <find>hifianti</find>
+      <find>Event</find>
+      <find>dz</find>
+      <find>const DZ</find>
+      <find>player</find>
+      <find>playpl</find>
+      <find>playPlaylist</find>
+      <find>simpl</find>
+      <find>simp</find>
+      <find>imageS</find>
+      <find>ispl</find>
+      <find>playeris</find>
+      <find>.Event</find>
+      <find>pause</find>
+      <find>relative</find>
     </findStrings>
     <dirStrings>
       <dir>C:\wrk\IKnowThisSong\src</dir>
@@ -163,7 +177,6 @@
         <option value="$PROJECT_DIR$/src/index.tsx" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/src/util/constants.ts" />
-        <option value="$PROJECT_DIR$/src/components/myPlayer/MyPlayer.tsx" />
         <option value="$PROJECT_DIR$/src/components/MyList.tsx" />
         <option value="$PROJECT_DIR$/src/data/createPouchDb.js" />
         <option value="$PROJECT_DIR$/src/data/GetComposers.ts" />
@@ -175,8 +188,9 @@
         <option value="$PROJECT_DIR$/src/components/MyPlaylistTracks.tsx" />
         <option value="$PROJECT_DIR$/src/data/composers.ts" />
         <option value="$PROJECT_DIR$/src/components/myMusic/MyArtists.tsx" />
-        <option value="$PROJECT_DIR$/src/components/App.tsx" />
+        <option value="$PROJECT_DIR$/src/components/myPlayer/MyPlayer.tsx" />
         <option value="$PROJECT_DIR$/src/stores/AppStore.ts" />
+        <option value="$PROJECT_DIR$/src/components/App.tsx" />
       </list>
     </option>
   </component>
@@ -252,7 +266,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="myart&#9;FILE&#9;file://C:/wrk/IKnowThisSong/src/components/myMusic/MyArtists.tsx" />
+    <property name="SearchEverywhereHistoryKey" value="appst&#9;FILE&#9;file://C:/wrk/IKnowThisSong/src/stores/AppStore.ts&#10;myart&#9;FILE&#9;file://C:/wrk/IKnowThisSong/src/components/myMusic/MyArtists.tsx" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.prettier" value="true" />
@@ -328,17 +342,25 @@
       <option name="project" value="LOCAL" />
       <updated>1521110581081</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Imatges">
+      <created>1521121513142</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1521121513142</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59819000" />
+    <option name="totallyTimeSpent" value="73029000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TypeScript" order="8" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25150785" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25150785" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -346,7 +368,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.3290461" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3290461" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.34083602" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.34083602" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39228296" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -383,31 +405,10 @@
     <MESSAGE value="Ja se senten les cançons de les Playlists i es pode triar i aturar." />
     <MESSAGE value="Millores." />
     <MESSAGE value="Millores" />
-    <option name="LAST_COMMIT_MESSAGE" value="Millores" />
+    <MESSAGE value="Imatges" />
+    <option name="LAST_COMMIT_MESSAGE" value="Imatges" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/samples/javascript-samples/basic-custom-player/index.html" />
-    <entry file="file://$PROJECT_DIR$/channel.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="67" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/react-list/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2016.full.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="4711" column="13" selection-start-line="4711" selection-start-column="13" selection-end-line="4711" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/material-ui/SvgIcon/SvgIcon.d.ts" />
     <entry file="file://$PROJECT_DIR$/node_modules/first-image-search-load/index.js" />
     <entry file="file://$PROJECT_DIR$/src/components/App.css" />
@@ -665,6 +666,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/composers.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="164" column="1" selection-start-line="164" selection-start-column="1" selection-end-line="164" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/myMusic/MyArtists.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="68" column="72" selection-start-line="68" selection-start-column="72" selection-end-line="68" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/myPlayer/MyPlayer.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="63" column="12" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/play.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/transparentPlay.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/img/transparentPlay.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/MyPlaylistTracks.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
@@ -677,8 +714,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/myMusic/MyPlaylists.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="113" column="36" selection-start-line="113" selection-start-column="36" selection-end-line="113" selection-end-column="36" />
+        <state relative-caret-position="462">
+          <caret line="143" selection-start-line="143" selection-end-line="143" />
           <folding>
             <element signature="e#212#267#0" expanded="true" />
             <element signature="e#563#642#0" expanded="true" />
@@ -686,47 +723,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/composers.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="164" column="1" selection-start-line="164" selection-start-column="1" selection-end-line="164" selection-end-column="1" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/img/pause.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/myMusic/MyArtists.tsx">
+    <entry file="file://$PROJECT_DIR$/src/stores/AppStore.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="146" column="33" selection-start-line="146" selection-start-column="33" selection-end-line="146" selection-end-column="33" />
+        <state relative-caret-position="187">
+          <caret line="334" column="33" lean-forward="true" selection-start-line="334" selection-start-column="33" selection-end-line="334" selection-end-column="33" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#68#0" expanded="true" />
+            <element signature="e#265#333#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="107" column="33" selection-start-line="107" selection-start-column="33" selection-end-line="107" selection-end-column="33" />
+        <state relative-caret-position="530">
+          <caret line="124" selection-start-line="116" selection-end-line="125" />
           <folding>
             <element signature="e#73#104#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stores/AppStore.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="129" column="40" selection-start-line="129" selection-start-column="40" selection-end-line="129" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/myPlayer/MyPlayer.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
