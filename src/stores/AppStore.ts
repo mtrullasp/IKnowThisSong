@@ -104,13 +104,31 @@ export class TMyTab {
   onEnter?: () => void;
 }
 
+export interface IDZ {
+  Event: {
+    subscribe: (key: string, callback: Function ) => void;
+  }
+
+  api: any;
+}
+
 export class AppState {
   constructor() {
+/*
     getComposers().then(resp => {
       debugger ;this.composers = resp;
     });
+*/
     this.userArtistsFromApi = [];
-    const DZ = window.DZ;
+    const DZ: IDZ = window.DZ;
+
+    DZ.Event.subscribe('player_play', () => {
+      this.imageSide = 'hifiAntic.gif';
+    });
+
+    DZ.Event.subscribe('player_pause', () => {
+      this.imageSide = 'hifiAnticFix.gif';
+    });
 
     insertConposers(composers);
 
@@ -312,7 +330,7 @@ export class AppState {
         if (a1[sortBy] > a2[sortBy]) {
           return -1;
         }
-        if (a1[sortBy] < a2[sortBy]) {
+        if (a1  [sortBy] < a2[sortBy]) {
           return 1;
         }
         return 0;
@@ -517,14 +535,14 @@ export class AppState {
 
   @observable showOnlyComposers: boolean = true;
 
-  @observable composers: Array<number> = [];
+  @observable composers: Array<number> = composers;
   @action
   toggleComposer(artistId: number) {
     if (this.composers.includes(artistId)) {
       this.composers.splice(this.composers.indexOf(artistId), 1);
     } else {
-      this.composers.push(artistId);
-      insertConposers(toJS(this.composers));
+      this.composers.push(artistId);debugger ;
+      //insertConposers(toJS(this.composers));
     }
   }
 
@@ -555,4 +573,7 @@ export class AppState {
   @observable activeTracksList: Array<ITrack> = [];
   @observable activeTrackIndex: number;
   @observable isPlaying: boolean = false;
+
+  @observable imageSide: string = 'hifiAnticFix.gif';
+
 }

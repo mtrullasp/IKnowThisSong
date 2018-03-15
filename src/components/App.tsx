@@ -66,7 +66,7 @@ class App extends React.Component<IProps, {}> {
     return (
       <div>
         <header>
-          <Grid fluid className={style({ margin: 0, padding: 0 })}>
+          <Grid fluid className={style({ margin: 0, padding: 0, overflowX: 'hidden', overflowY: 'auto' })}>
             <Row>
               <Col lg={4}>
                 <Row>
@@ -88,9 +88,9 @@ class App extends React.Component<IProps, {}> {
                     </span>
                   </Col>
                   <Col lg={12}>
-                    <div style={{ marginBottom: 10 }}>
-                      <div style={{ position: "relative", left: 10, top: 0 }}>
-                        <span>Streaming partner </span>
+                    <div style={{ marginBottom: 20 }}>
+                      <div style={{ position: "absolute", left: 10, bottom: 10 }}>
+                        <span>Powered by </span>
                         <a href="http://www.deezer.com" target="_blank">
                           <img src="../../img/deezer.png" />
                         </a>
@@ -101,11 +101,11 @@ class App extends React.Component<IProps, {}> {
                     className={style({
                       width: "100%",
                       height: "100%",
-                      margin: 0
+                      margin: 10
                     })}
                   >
                     <img
-                      src="../../img/gramophone.png"
+                      src={'../../img/' + this.props.appState.imageSide}
                       style={{ width: "100%", cursor: "pointer" }}
                       onClick={() => {
                         this.props.appState.goBack();
