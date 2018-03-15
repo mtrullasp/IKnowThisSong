@@ -86,10 +86,10 @@ class MyArtists extends React.Component<IProps, {}> {
       </div>)
 */
     return (
-      <GridList cellHeight={300} cols={5}>
+      <GridList cellHeight={300} cols={4}>
         <GridListTile
           key="Subheader"
-          cols={5}
+          cols={4}
           style={{ height: 50, padding: 0, margin: 0 }}
         >
           <Subheader component="div" style={{ margin: 0, padding: 0 }}>
@@ -155,7 +155,7 @@ class MyArtists extends React.Component<IProps, {}> {
                     style={{
                       display: "flexbox",
                       justifyContent: "flex-end",
-                      fontSize: 14,
+                      fontSize: 12,
                       color: "white"
                     }}
                   >
@@ -163,13 +163,13 @@ class MyArtists extends React.Component<IProps, {}> {
                   </span>
                 </div>
               }
-              /*
-                  actionIcon={
-                    <IconButton className={classes.icon}>
-                      <a href={artist.link}><InfoIcon /></a>
-                    </IconButton>
-                  }
-*/
+              actionIcon={
+                <IconButton className={classes.icon}>
+                  <a href={artist.link}>
+                    <InfoIcon />
+                  </a>
+                </IconButton>
+              }
             />
           </GridListTile>
         ))}

@@ -68,7 +68,7 @@ class App extends React.Component<IProps, {}> {
         <header>
           <Grid fluid className={style({ margin: 0, padding: 0 })}>
             <Row>
-              <Col lg={3}>
+              <Col lg={4}>
                 <Row>
                   <Col lg={12}>
                     <span style={titleStyle}>I KNOW THIS SONG</span>
@@ -114,7 +114,7 @@ class App extends React.Component<IProps, {}> {
                   </Col>
                 </Row>
               </Col>
-              <Col lg={9}>
+              <Col lg={8}>
                 {/*
                 <Row className={style({ height: HEADER_HEIGHT })}>
                   <Col lg={2}>

@@ -88,10 +88,10 @@ class MyPlaylists extends React.Component<IProps, {}> {
       </div>)
 */
     return (
-      <GridList cellHeight={300} cols={5}>
+      <GridList cellHeight={250} cols={4}>
         <GridListTile
           key="Subheader"
-          cols={5}
+          cols={4}
           style={{ height: 40, margin: 0, padding: 0 }}
         >
           <Subheader component="div" style={{ margin: 0, padding: 0 }}>
@@ -112,15 +112,12 @@ class MyPlaylists extends React.Component<IProps, {}> {
           </Subheader>
         </GridListTile>
         {this.props.appState.userPlaylists.map((playlist, index) => (
-          <Link
-            to={ROUTE_PLAYLIST.replace(
-              ":playlistId",
-              playlist.id.toString()
-            )}
-          >
           <GridListTile
             key={playlist.id}
             className={style({ cursor: "pointer" })}
+            onClick={() => {
+              this.props.appState.setActivePlaylist(playlist.id)
+            }}
           >
             <img src={playlist.picture_medium} alt={playlist.title} />
             <GridListTileBar
@@ -131,12 +128,11 @@ class MyPlaylists extends React.Component<IProps, {}> {
                   <span style={{ fontSize: 11 }}>
                     {playlist.nb_tracks} traks and {playlist.fans} fans
                   </span>
-                  <input type={"text"} value={playlist.id} />
+                  {/*<input type={"text"} value={playlist.id} />*/}
                 </div>
               }
             />
           </GridListTile>
-          </Link>
         ))}
       </GridList>
     );

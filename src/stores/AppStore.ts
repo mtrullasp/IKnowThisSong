@@ -1,12 +1,14 @@
-import { action, observable, reaction, computed } from "mobx";
+import { action, observable, reaction, computed, toJS } from "mobx";
 import { History } from "history";
 import {
   MTRULLASP_USER_ID,
-  ROUTE_INTERPRETERS,
+  ROUTE_INTERPRETERS, ROUTE_PLAYLIST,
   ROUTE_PLAYLISTS
 } from "../util/constants";
-import composers from "../data/composers";
+//import composersTs from "../data/composers";
+import { getComposers, insertConposers } from "../data/dbComposers";
 import composersPhoto from "../data/composersPhoto";
+import composers from "../data/composers";
 
 declare let window: any;
 
@@ -104,8 +106,14 @@ export class TMyTab {
 
 export class AppState {
   constructor() {
+    getComposers().then(resp => {
+      debugger ;this.composers = resp;
+    });
     this.userArtistsFromApi = [];
     const DZ = window.DZ;
+
+    insertConposers(composers);
+
     reaction(
       () => this.userId,
       user => {
@@ -283,12 +291,14 @@ export class AppState {
     return !!myPhoto ? myPhoto.foto : defaultPhoto;
   }
 
+  @observable userPlayListSortField: string = 'title';
   @observable userPlaylistsFromApi: Array<IPlaylist>;
   @computed
   get userPlaylists(): Array<IPlaylist> {
     if (!this.userPlaylistsFromApi) {
       return [];
     }
+    const sortBy = this.userPlayListSortField;
     return this.userPlaylistsFromApi
       .filter((playlist: IPlaylist) => {
         if (!this.artistNameFilter) {
@@ -299,10 +309,10 @@ export class AppState {
           .includes(this.artistNameFilter.toLowerCase());
       })
       .sort((a1, a2): number => {
-        if (a1.fans > a2.fans) {
+        if (a1[sortBy] > a2[sortBy]) {
           return -1;
         }
-        if (a1.fans < a2.fans) {
+        if (a1[sortBy] < a2[sortBy]) {
           return 1;
         }
         return 0;
@@ -498,15 +508,23 @@ export class AppState {
     this.history.push(this.tabActiveRoutePath);
   }
 
+  @action setActivePlaylist(id: number) {
+    this.go(ROUTE_PLAYLIST.replace(
+      ":playlistId",
+      id.toString()
+    ))
+  }
+
   @observable showOnlyComposers: boolean = true;
 
-  @observable composers: Array<number> = composers;
+  @observable composers: Array<number> = [];
   @action
   toggleComposer(artistId: number) {
     if (this.composers.includes(artistId)) {
       this.composers.splice(this.composers.indexOf(artistId), 1);
     } else {
       this.composers.push(artistId);
+      insertConposers(toJS(this.composers));
     }
   }
 

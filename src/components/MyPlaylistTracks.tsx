@@ -35,15 +35,13 @@ class MyPlaylistTracks extends React.Component<IProps, {}> {
       this.props.appState.activeTracksList = resp.tracks;
     });
 */
-    DZ.api("/playlist/" + playlistId + "/tracks", (tracks: IResponseCollection<ITrack>) => {
+    DZ.api("/playlist/" + playlistId + "/tracks?limit=1000", (tracks: IResponseCollection<ITrack>) => {
       debugger ;this.props.appState.activeTracksList = tracks.data;
-/*
       tracks.data.forEach(track => {
         DZ.api("/track/" + track.id, trackAmpliat => {
           debugger ;track = trackAmpliat;
         })
       })
-*/
     });
   }
 
