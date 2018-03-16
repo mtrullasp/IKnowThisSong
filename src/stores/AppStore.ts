@@ -20,6 +20,7 @@ export interface IDZ {
   login: (callback: (response: any) => any, perms: any) => void;
   player: {
     playPlaylist(playlistId: number, autoPlay: boolean, index: number);
+    getCurrentIndex(): number;
     isPlaying: boolean;
     next: () => void;
     prev: () => void;
@@ -149,11 +150,16 @@ export class AppState {
     this.userArtistsFromApi = [];
 
     DZ.Event.subscribe("player_play", () => {
+      debugger ;this.activeTrackIndex = DZ.player.getCurrentIndex() + 1;
       this.imageSide = "hifiAntic.gif";
     });
 
     DZ.Event.subscribe("player_paused", () => {
       this.imageSide = "hifiAnticFix.gif";
+    });
+
+    DZ.Event.subscribe("player_position", (resp: any) => {
+      debugger ;
     });
 
     insertConposers(composers);
@@ -661,12 +667,12 @@ export class AppState {
 
   @action
   playerPlayPlaylist(playlistId: number, autoPlay: boolean, index: number) {
-    DZ.player.playPlaylist(playlistId, autoPlay, index);
+    DZ.player.playPlaylist(playlistId, autoPlay, index - 1);
   }
 
   @action
   playerChangeIndex(index: number) {
     this.activeTrackIndex = index;
-    DZ.player.playPlaylist(this.activePlayListId, true, index);
+    DZ.player.playPlaylist(this.activePlayListId, true, index - 1);
   }
 }
