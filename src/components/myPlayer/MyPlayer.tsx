@@ -73,6 +73,7 @@ class MyPlayer extends React.Component<IProps, {}> {
       );
     });
     debugger;
+/*
     const backGroundStyle: CSSProperties = this.props.waterMark
       ? {
           backgroundImage:
@@ -82,9 +83,27 @@ class MyPlayer extends React.Component<IProps, {}> {
           filter: "alpha(opacity=10)"
         }
       : {};
+*/
+    const TOP = 100;
+    const LEFT = 560;
+    const backgroundImage = this.props.waterMark ? (
+      <img
+        src={this.props.appState.activePlaylist.picture_big}
+        style={{
+          width: '100%',
+          position: "absolute",
+          pointerEvents: "none",
+          opacity: 0.2,
+          top: 0,
+          right: 0,
+          left: 0
+        }}
+      />
+    ) : null;
     return (
-      <div style={backGroundStyle}>
+      <div style={{position: 'absolute', top: TOP, right: 0, left: LEFT}}>
         <List>{items}</List>
+        {backgroundImage}
       </div>
     );
   }

@@ -27,12 +27,12 @@ const theme = createMuiTheme({
   overrides: {
     MuiListItemText: {
       primary: {
-        fontSize: 20,
+        fontSize: 26,
         fontFamily: INFO_FONT
       },
       secondary: {
         color: "#6b5e51",
-        fontSize: 18,
+        fontSize: 24,
         fontFamily: INFO_FONT
       }
     }
@@ -140,6 +140,7 @@ class App extends React.Component<IProps, {}> {
                     >
                       <div id="overlayCcontainer">
                         <img
+                          onClick={() => {this.props.appState.goBack()}}
                           src={"../../img/" + this.props.appState.imageSide}
                           style={{
                             width: "100%",

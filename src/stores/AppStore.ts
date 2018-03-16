@@ -150,7 +150,7 @@ export class AppState {
     this.userArtistsFromApi = [];
 
     DZ.Event.subscribe("player_play", () => {
-      debugger ;this.activeTrackIndex = DZ.player.getCurrentIndex() + 1;
+      debugger ;this.activeTrackIndex = DZ.player.getCurrentIndex();
       this.imageSide = "hifiAntic.gif";
     });
 
@@ -159,7 +159,7 @@ export class AppState {
     });
 
     DZ.Event.subscribe("player_position", (resp: any) => {
-      debugger ;
+      //debugger ;
     });
 
     insertConposers(composers);
@@ -667,12 +667,12 @@ export class AppState {
 
   @action
   playerPlayPlaylist(playlistId: number, autoPlay: boolean, index: number) {
-    DZ.player.playPlaylist(playlistId, autoPlay, index - 1);
+    DZ.player.playPlaylist(playlistId, autoPlay, index);
   }
 
   @action
   playerChangeIndex(index: number) {
-    this.activeTrackIndex = index;
-    DZ.player.playPlaylist(this.activePlayListId, true, index - 1);
+    this.activeTrackIndex = index;debugger ;
+    DZ.player.playPlaylist(this.activePlayListId, true, index);
   }
 }
