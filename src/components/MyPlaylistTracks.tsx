@@ -48,7 +48,7 @@ class MyPlaylistTracks extends React.Component<IProps, {}> {
   static defaultProps = {};
 
   render() {
-    return <MyPlayer />;
+    return <MyPlayer waterMark={false} />;
   }
 }
 

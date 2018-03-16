@@ -3,12 +3,14 @@ import Button from "material-ui/Button";
 import { inject, observer } from "mobx-react";
 import { AppState } from "../../stores/AppStore";
 import List, { ListItem, ListItemText } from "material-ui/List";
-import { FANCY_FONT, SELECTED_COLOR } from "../../util/constants";
+import { FUNNY_FONT, SELECTED_COLOR } from "../../util/constants";
 import Typography from "material-ui/Typography";
 import { style } from "typestyle";
+import { CSSProperties } from "react";
 declare let window: any;
 
 interface IProps {
+  waterMark: boolean;
   appState?: AppState;
 }
 @inject("appState")
@@ -30,13 +32,17 @@ class MyPlayer extends React.Component<IProps, {}> {
             background:
               index === this.props.appState.activeTrackIndex
                 ? SELECTED_COLOR
-                : "transparent"
+                : "transparent",
+            fontFamily: FUNNY_FONT,
+            fontSize: 40,
+            color: "white"
           }}
           button
           component="a"
           href="#simple-list"
           onClick={() => {
-            debugger ;if (
+            debugger;
+            if (
               state.playerIsPlaying &&
               this.props.appState.activeTrackIndex === index
             ) {
@@ -62,13 +68,22 @@ class MyPlayer extends React.Component<IProps, {}> {
             key={index}
             primary={track.album.title}
             secondary={track.title}
-            className={style({ fontFamily: FANCY_FONT, fontSize: 20 })}
           />
         </ListItem>
       );
     });
+    debugger;
+    const backGroundStyle: CSSProperties = this.props.waterMark
+      ? {
+          backgroundImage:
+            "url(" + this.props.appState.activePlaylist.picture_big + ")",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100%",
+          filter: "alpha(opacity=10)"
+        }
+      : {};
     return (
-      <div>
+      <div style={backGroundStyle}>
         <List>{items}</List>
       </div>
     );

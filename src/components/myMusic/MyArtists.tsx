@@ -14,7 +14,7 @@ import { style } from "typestyle";
 import { EventHandler } from "react";
 import { withRouter } from "react-router";
 import TextField from "material-ui/TextField";
-import { FANCY_FONT } from "../../util/constants";
+import { FUNNY_FONT } from "../../util/constants";
 
 const styles = theme => ({
   root: {
@@ -99,7 +99,7 @@ class MyArtists extends React.Component<IProps, {}> {
               className={style({
                 width: "100%",
                 fontSize: 50,
-                fontFamily: FANCY_FONT
+                fontFamily: FUNNY_FONT
               })}
               margin="none"
               onChange={(e: any) => {
@@ -168,7 +168,7 @@ class MyArtists extends React.Component<IProps, {}> {
                   <a
                     href={artist.link}
                     onClick={(e: any) => {
-                      e.preventPrpagation();
+                      e.stopPropagation();
                     }}
                   >
                     <InfoIcon />

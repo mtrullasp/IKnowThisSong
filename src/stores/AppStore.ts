@@ -2,26 +2,30 @@ import { action, observable, reaction, computed, toJS } from "mobx";
 import { History } from "history";
 import {
   MTRULLASP_USER_ID,
-  ROUTE_INTERPRETERS, ROUTE_PLAYLIST,
+  ROUTE_INTERPRETERS,
+  ROUTE_PLAYLIST,
   ROUTE_PLAYLISTS
 } from "../util/constants";
 //import composersTs from "../data/composers";
 import { getComposers, insertConposers } from "../data/dbComposers";
 import composersPhoto from "../data/composersPhoto";
 import composers from "../data/composers";
+import * as $ from "jquery";
 
 export interface IDZ {
   Event: {
-    subscribe: (key: string, callback: Function ) => void;
+    subscribe: (key: string, callback: Function) => void;
   };
   api: any;
   login: (callback: (response: any) => any, perms: any) => void;
   player: {
-    playPlaylist(playlistId: number, autoPlay: boolean, index: number),
-    isPlaying: boolean,
-    play: () => void,
-    pause: ()=> void
-  }
+    playPlaylist(playlistId: number, autoPlay: boolean, index: number);
+    isPlaying: boolean;
+    next: () => void;
+    prev: () => void;
+    play: () => void;
+    pause: () => void;
+  };
 }
 
 declare let window: any;
@@ -105,9 +109,11 @@ export interface IPlaylist {
   id: number;
   title: string;
   nb_tracks: number;
-  fans;
-  number;
+  fans: number;
+  link: string;
   picture_medium: string;
+  picture_big: string;
+  picture: string;
 }
 
 export class TMyTab {
@@ -121,19 +127,33 @@ export class TMyTab {
 
 export class AppState {
   constructor() {
-/*
+    window.addEventListener("keydown", event => {
+      console.log(event.key);
+      if (event.key === "MediaTrackNext") {
+        this.playerNext();
+      }
+      if (event.key === "MediaTrackPrevious") {
+        this.playerPrev();
+      }
+      if (event.key === "Escape") {
+        this.playerPause();
+        this.goBack();
+      }
+    });
+
+    /*
     getComposers().then(resp => {
       debugger ;this.composers = resp;
     });
 */
     this.userArtistsFromApi = [];
 
-    DZ.Event.subscribe('player_play', () => {
-      this.imageSide = 'hifiAntic.gif';
+    DZ.Event.subscribe("player_play", () => {
+      this.imageSide = "hifiAntic.gif";
     });
 
-    DZ.Event.subscribe('player_paused', () => {
-      this.imageSide = 'hifiAnticFix.gif';
+    DZ.Event.subscribe("player_paused", () => {
+      this.imageSide = "hifiAnticFix.gif";
     });
 
     insertConposers(composers);
@@ -253,6 +273,18 @@ export class AppState {
   });
 */
 
+  @action
+  playerNext() {
+    const index = this.activeTrackIndex + 1;
+    this.playerChangeIndex(index);
+  }
+
+  @action
+  playerPrev() {
+    const index = this.activeTrackIndex - 1;
+    this.playerChangeIndex(index);
+  }
+
   private isComposer = (artistId: number): boolean => {
     return this.composers.includes(artistId);
   };
@@ -315,7 +347,7 @@ export class AppState {
     return !!myPhoto ? myPhoto.foto : defaultPhoto;
   }
 
-  @observable userPlayListSortField: string = 'title';
+  @observable userPlayListSortField: string = "title";
   @observable userPlaylistsFromApi: Array<IPlaylist>;
   @computed
   get userPlaylists(): Array<IPlaylist> {
@@ -336,7 +368,7 @@ export class AppState {
         if (a1[sortBy] > a2[sortBy]) {
           return -1;
         }
-        if (a1  [sortBy] < a2[sortBy]) {
+        if (a1[sortBy] < a2[sortBy]) {
           return 1;
         }
         return 0;
@@ -530,11 +562,16 @@ export class AppState {
     this.history.push(this.tabActiveRoutePath);
   }
 
-  @action setActivePlaylist(id: number) {
-    this.go(ROUTE_PLAYLIST.replace(
-      ":playlistId",
-      id.toString()
-    ))
+  @action
+  setActivePlaylist(id: number) {
+    this.activePlayListId = id;
+    this.go(ROUTE_PLAYLIST.replace(":playlistId", id.toString()));
+  }
+
+  @computed
+  get activePlaylist(): IPlaylist {
+    debugger;
+    return this.userPlaylists.find(pl => pl.id === this.activePlayListId);
   }
 
   @observable showOnlyComposers: boolean = true;
@@ -545,7 +582,8 @@ export class AppState {
     if (this.composers.includes(artistId)) {
       this.composers.splice(this.composers.indexOf(artistId), 1);
     } else {
-      this.composers.push(artistId);debugger ;
+      this.composers.push(artistId);
+      debugger;
       //insertConposers(toJS(this.composers));
     }
   }
@@ -577,7 +615,7 @@ export class AppState {
   @observable activeTracksList: Array<ITrack> = [];
   @observable activeTrackIndex: number;
 
-/*
+  /*
   @computed get imageSide(): string {
     if (this.playerIsPlaying) {
       return "hifiAntic.gif";
@@ -587,24 +625,28 @@ export class AppState {
   }
 */
 
-  @observable imageSide: string = 'hifiAnticFix.gif';
-  @computed get imageSizeOverlay(): string {
+  @observable imageSide: string = "hifiAnticFix.gif";
+  @computed
+  get imageSizeOverlay(): string {
     if (this.playerIsPlaying) {
-      return 'pause.png';
+      return "pause.png";
     } else {
-      return 'transparentPlay.jpg';
+      return "transparentPlay.jpg";
     }
   }
 
-  @computed get playerIsPlaying(): boolean {
+  @computed
+  get playerIsPlaying(): boolean {
     return DZ.player.isPlaying;
   }
 
-  @action playerPlay() {
+  @action
+  playerPlay() {
     DZ.player.play();
   }
 
-  @action playerTogglePlay() {
+  @action
+  playerTogglePlay() {
     if (this.playerIsPlaying) {
       this.playerPause();
     } else {
@@ -612,11 +654,19 @@ export class AppState {
     }
   }
 
-  @action playerPause() {
+  @action
+  playerPause() {
     DZ.player.pause();
   }
 
-  @action playerPlayPlaylist(playlistId: number, autoPlay: boolean, index: number) {
+  @action
+  playerPlayPlaylist(playlistId: number, autoPlay: boolean, index: number) {
     DZ.player.playPlaylist(playlistId, autoPlay, index);
+  }
+
+  @action
+  playerChangeIndex(index: number) {
+    this.activeTrackIndex = index;
+    DZ.player.playPlaylist(this.activePlayListId, true, index);
   }
 }

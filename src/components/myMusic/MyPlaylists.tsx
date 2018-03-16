@@ -116,7 +116,7 @@ class MyPlaylists extends React.Component<IProps, {}> {
             key={playlist.id}
             className={style({ cursor: "pointer" })}
             onClick={() => {
-              this.props.appState.setActivePlaylist(playlist.id)
+              this.props.appState.setActivePlaylist(playlist.id);
             }}
           >
             <img src={playlist.picture_medium} alt={playlist.title} />
@@ -125,10 +125,12 @@ class MyPlaylists extends React.Component<IProps, {}> {
               title={<span style={{ fontSize: 12 }}>{playlist.title}</span>}
               subtitle={
                 <div>
-                  <span style={{ fontSize: 11 }}>
-                    {playlist.nb_tracks} traks and {playlist.fans} fans
-                  </span>
-                  {/*<input type={"text"} value={playlist.id} />*/}
+                  <a href={playlist.link}>
+                    <span style={{ fontSize: 11 }}>
+                      {playlist.nb_tracks} traks and {playlist.fans} fans
+                    </span>
+                    {/*<input type={"text"} value={playlist.id} />*/}
+                  </a>
                 </div>
               }
             />

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { AppState, TMyTab } from "../stores/AppStore";
 import { inject, observer } from "mobx-react";
-import { FANCY_FONT } from "../util/constants";
+import { FUNNY_FONT } from "../util/constants";
 
 interface IProps {
   appState?: AppState;
@@ -37,7 +37,7 @@ class MyTab extends React.Component<IProps, {}> {
         >
           <span
             style={{
-              fontFamily: FANCY_FONT,
+              fontFamily: FUNNY_FONT,
               fontSize: fontSize,
               fontWeight: fontWeight,
               display: "inline",
@@ -49,7 +49,7 @@ class MyTab extends React.Component<IProps, {}> {
           {tab.count && (
             <span
               style={{
-                fontFamily: FANCY_FONT,
+                fontFamily: FUNNY_FONT,
                 marginLeft: 5,
                 fontSize: 18,
                 fontWeight: 600,

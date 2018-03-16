@@ -1,0 +1,9 @@
+div#titol {
+    text-align: justify;
+}
+
+div#titol:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+}

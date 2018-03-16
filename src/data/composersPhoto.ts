@@ -10,8 +10,17 @@ const composersPhoto: Array<IFoto> = [
       "https://opinionesdepsicoanalistas.files.wordpress.com/2015/01/mus071b.jpg"
   },
   {
+    id: 1045,
+    foto:
+      "https://www.quotationof.com/images/leo-delibes-6.jpg"
+  },
+  {
     id: 1531,
     foto: "https://www.biografiasyvidas.com/biografia/n/fotos/nielsen.jpg"
+  },
+  {
+    id: 1536,
+    foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgY7KX-FMvn8wD1xGkcRibM4Fc_1WA36mrCPGkyVjUKEqlu3Mkkw"
   },
   {
     id: 1613,
@@ -244,6 +253,10 @@ const composersPhoto: Array<IFoto> = [
   {
     id: 14974,
     foto: "https://www.biografiasyvidas.com/biografia/s/fotos/singers.jpg"
+  },
+  {
+    id: 14978,
+    foto: "http://www.hoasm.org/XIIC/Boccherini_image_01.jpg"
   },
   {
     id: 14980,
